@@ -1,6 +1,10 @@
-
 @import '../../variables.scss';
+.wrapper1{
+  width: 100%;
+  background-color: #484283;
+}
 .wrapper{
+  margin: 0 auto;
     max-width: 1180px;
     // min-height: 598px;
     width: 100%;
@@ -17,20 +21,22 @@
     text-align: left;
   }
   .textH2{
-    // padding-top: 27px;
-    // height: 100px;
+    margin-top: 59px;
+    margin-bottom: 21px;
     text-align: left;
-    @include font(#fff, Jost, 36px, normal, 500, 51px, -1px);
+    @include font(#fff, Jost, 37px, normal, 700, 51px, -1px);
     //font-size: clamp(15px, 2vw, 20px);
 } 
   .faqItem {
     margin: 0px;
   }
   .questionIcon{
+    margin-left: -27px;
     max-width: 880px;
     width: 100%;
     display: flex;
     justify-content: space-between;
+    @include font(#fff, Jost, 17px, normal, 700, 20px, -1px);
   }
   
   .question {
@@ -58,6 +64,8 @@
   }
   
 .icon {
+  padding-top: 20px;
+  font-size: 50px;
     transition: transform 0.5s ease;
       &.active1 {
         transition: transform 0.5s ease;

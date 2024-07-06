@@ -12,9 +12,9 @@ function App() {
           count is {count}
         </button>
       </div> */}
-      <div>
-        <Body />
-      </div>
+      {/* <div> */}
+      <Body />
+      {/* </div> */}
       {/* <Header />
       <Home />
       <Footer /> */}

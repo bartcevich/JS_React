@@ -1,11 +1,18 @@
 @import '../../variables.scss';
-
+.wrapper1{
+  // max-width: 1440px;
+  width: 100%;
+  // height: 83px;
+  background-color: #484283;
+ position: fixed;
+  top: 0;
+  left: auto; 
+}
 .siteNav {
   // @include font(#000, Inter, 20px, normal, 400, 25px, 0);
   //font-size: clamp(15px, 3vw, 20px);
-  position: fixed;
-  top: 0;
-  left: auto;
+  margin: 0 auto;
+  
   max-width: 1180px;
   width: 100%;
   height: 83px;

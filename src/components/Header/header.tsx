@@ -56,7 +56,7 @@ const Navigation: React.FC = () => {
   };
 
   return (
-    <>
+    <div className={styles.wrapper1}>
       <nav
         className={`${styles.siteNav} ${isTop ? styles.top : ""} ${
           isMobile ? styles.mobile : ""
@@ -100,7 +100,7 @@ const Navigation: React.FC = () => {
           ☰
         </div>
       </nav>
-    </>
+    </div>
   );
 };
 export default Navigation;

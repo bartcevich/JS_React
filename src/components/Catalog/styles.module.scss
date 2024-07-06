@@ -1,20 +1,19 @@
 @import '../../variables.scss';
 .container{
-    // width: 100vw;
-//   height: 1848px;
-  background-color: #ffffff;
+    background-color: #ffffff;
 }
 .content{
-        width: 1180px;
-        display: flex;
-        flex-flow: column;
+    margin: 0 auto;
+    width: 1180px;
+    display: flex;
+    flex-flow: column;
    
 }
 .textH2{
-    // padding-top: 27px;
+    margin-top: 12px;
     height: 100px;
     text-align: left;
-    @include font(#444B58, Jost, 36px, normal, 500, 51px, -1px);
+    @include font(#444B58, Jost, 37px, normal, 700, 37px, -1px);
     //font-size: clamp(15px, 2vw, 20px);
     display: flex;
     align-items: center;
@@ -32,9 +31,9 @@
 }
 .forCards{
     display: flex;
-flex-flow: wrap;
-justify-content: center;
-gap: 35px;
+    flex-flow: wrap;
+    justify-content: center;
+    gap: 20px;
 }
 .description{
     display: flex;
@@ -49,10 +48,14 @@ gap: 35px;
 .CartIcon2{
     padding: 0;
 }
+.forButton{
+    display: flex;
+    justify-content: center;
+}
 
 .button{
     margin: 48px;
-    width: 207px;
+    width: 180px;
     height: 62px;
     background-color: #F14F4F;
     border-radius: 5%;

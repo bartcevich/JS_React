@@ -36,41 +36,38 @@ function FaqsComponent() {
   };
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.faqsContainer}>
-        <h2 className={styles.textH2}>FAQ</h2>
-        {faqsData.map((faq) => (
-          <div key={faq.id} className={styles.faqItem}>
-            <div className={styles.line}></div>
-            <div
-              className={`${styles.question} ${
-                openQuestions[faq.id] ? styles.active : ""
-              }`}
-              onClick={() => handleQuestionClick(faq.id)}
-            >
-              <div className={styles.questionIcon}>
-                <h3>{faq.question}</h3>
-                <div
-                  className={`${styles.icon} ${
-                    openQuestions[faq.id] ? styles.active1 : ""
-                  }`}
-                >
-                  +
-                  {/* {openQuestions[faq.id] ? (
-                    <div className={styles.active1}>x</div>
-                  ) : (
-                    <div className={styles.active1}>+</div>
-                  )} */}
+    <div className={styles.wrapper1}>
+      <div className={styles.wrapper}>
+        <div className={styles.faqsContainer}>
+          <h2 className={styles.textH2}>FAQ</h2>
+          {faqsData.map((faq) => (
+            <div key={faq.id} className={styles.faqItem}>
+              <div className={styles.line}></div>
+              <div
+                className={`${styles.question} ${
+                  openQuestions[faq.id] ? styles.active : ""
+                }`}
+                onClick={() => handleQuestionClick(faq.id)}
+              >
+                <div className={styles.questionIcon}>
+                  <h3>{faq.question}</h3>
+                  <span></span>
+                  <div
+                    className={`${styles.icon} ${
+                      openQuestions[faq.id] ? styles.active1 : ""
+                    }`}
+                  >
+                    +
+                  </div>
                 </div>
+                {openQuestions[faq.id] && (
+                  <div className={styles.answer}>{faq.answer}</div>
+                )}
               </div>
-              {openQuestions[faq.id] && (
-                <div className={styles.answer}>{faq.answer}</div>
-              )}
+              <div className={styles.line}></div>
             </div>
-            <div className={styles.line}></div>
-            {/* <div>{openQuestions[faq.id]}</div> */}
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

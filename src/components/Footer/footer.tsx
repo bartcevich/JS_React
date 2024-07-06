@@ -16,7 +16,7 @@ function Navigation() {
   };
 
   return (
-    <>
+    <div className={styles.wrapper1}>
       <nav className={styles.siteNav}>
         <div className={styles.logoContainer}>
           <div className={styles.logo}>
@@ -43,7 +43,7 @@ function Navigation() {
           ☰
         </div>
       </nav>
-    </>
+    </div>
   );
 }
 export default Navigation;
