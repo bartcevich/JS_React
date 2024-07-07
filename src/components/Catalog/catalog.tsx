@@ -2,17 +2,25 @@ import styles from "./styles.module.scss";
 import React, { useEffect, useState } from "react";
 import { getCatalog } from "../../services/getData";
 import shoppingCartIcon2 from "../../assets/Add control.png";
+import overlayImage from "../../assets/Hover.png";
+import ButtonMinus from "../../assets/ButtonMinus.png";
+import ButtonPlus from "../../assets/ButtonPlus.png";
 
 type catalogState = {
   price: string;
   name: string;
   image: string;
+  ID: number;
 };
 
 function Catalog() {
   const CatalogData = getCatalog();
   const [answer, setAnswer] = useState("");
   const [allFound, setAllFound] = useState<catalogState[]>([]);
+  const [quantity, setQuantity] = useState(1);
+  const [selectedProduct, setSelectedProduct] = useState<catalogState | null>(
+    null
+  );
 
   useEffect(() => {
     const foundDinner = CatalogData.filter((item) => item.image === answer);
@@ -22,6 +30,27 @@ function Catalog() {
   const handleAnswerChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const enteredAnswer: string = e.target.value;
     setAnswer(enteredAnswer);
+  };
+
+  const onShowProduct = (product: catalogState) => {
+    product;
+  };
+
+  const onPrinterClick = (product: catalogState) => {
+    setSelectedProduct(product);
+  };
+  // const onPrinterClick = (e: { stopPropagation: () => void }) => {
+  //   e.stopPropagation();
+  // };
+
+  const onIncrementQuantity = () => {
+    setQuantity((prevQuantity) => prevQuantity + 1);
+  };
+
+  const onDecrementQuantity = () => {
+    if (quantity > 0) {
+      setQuantity((prevQuantity) => prevQuantity - 1);
+    }
   };
 
   const handleClick2 = () => {
@@ -49,22 +78,44 @@ function Catalog() {
           <div className={styles.forCards}>
             {allFound.length > 0}
             {allFound.map((menuItem, index) => (
-              <div key={index} className={styles.menuItem}>
+              <div
+                key={index}
+                className={styles.menuItem}
+                onClick={() => onShowProduct(menuItem)}
+              >
                 <div className={styles.wrapper}>
-                  <div className={styles.image}>
+                  <div className={styles.imageContainer}>
                     <img src={menuItem.image} alt="Image" />
+                    <div className={styles.hoverContent}>
+                      <img src={overlayImage} alt="Image" />
+                    </div>
                   </div>
                   <div className={styles.description}>
                     <div className={styles.label}>
                       <div className={styles.name}>{menuItem.name}</div>
                       <div className={styles.price}>{menuItem.price}</div>
                     </div>
-                    <button className={styles.CartIcon2}>
-                      <img
-                        src={shoppingCartIcon2}
-                        alt="иконка корзины покупок"
-                      />
-                    </button>
+                    {selectedProduct?.ID === menuItem.ID ? (
+                      <div className={styles.quantityButtons}>
+                        <button onClick={onDecrementQuantity}>
+                          <img src={ButtonMinus} alt="Button Minus" />
+                        </button>
+                        <span>{quantity} item</span>
+                        <button onClick={onIncrementQuantity}>
+                          <img src={ButtonPlus} alt="Button Plus" />
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        className={styles.CartIcon2}
+                        onClick={() => onPrinterClick(menuItem)}
+                      >
+                        <img
+                          src={shoppingCartIcon2}
+                          alt="иконка корзины покупок"
+                        />
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>

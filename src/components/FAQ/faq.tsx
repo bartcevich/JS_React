@@ -51,7 +51,6 @@ function FaqsComponent() {
               >
                 <div className={styles.questionIcon}>
                   <h3>{faq.question}</h3>
-                  <span></span>
                   <div
                     className={`${styles.icon} ${
                       openQuestions[faq.id] ? styles.active1 : ""
