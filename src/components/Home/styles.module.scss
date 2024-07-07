@@ -1,22 +1,17 @@
 @import '../../variables.scss';
 .container{
-    // width: 100vw;
   height: 590px;
   background-color: #484283;
-//   position: relative;
-//   left: 50%;
-//   top: 50%;
-//   transform: translate(-50%, -50%);
 }
 .content{
     margin: 0 auto;
-        width: 1180px;
-        padding-top: 140px;
-        background-image: url("../../assets/back_text.png");
-        background-repeat: no-repeat;
-        background-position: center top 260px;
-        display: flex;
-        flex-flow: column;
+    max-width: 1180px;
+    padding-top: 140px;
+    background-image: url("../../assets/back_text.png");
+    background-repeat: no-repeat;
+    background-position: center top 260px;
+    display: flex;
+    flex-flow: column;
    
 }
 .textH1{
@@ -33,6 +28,11 @@
     @include font(#fff, Jost, 18px, normal, bold, 25px, -1px);
     //font-size: clamp(15px, 2vw, 20px);
 }
+@media (max-width: 550px){
+    .text{
+      margin-top: 30px;
+    }
+  } 
 .button{
     margin-top: 30px;
     width: 207px;

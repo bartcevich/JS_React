@@ -56,7 +56,7 @@ const Navigation: React.FC = () => {
   };
 
   return (
-    <div className={styles.wrapper1}>
+    <div className={`${styles.wrapper1} ${isTop ? styles.top : ""} `}>
       <nav
         className={`${styles.siteNav} ${isTop ? styles.top : ""} ${
           isMobile ? styles.mobile : ""
