@@ -2,6 +2,7 @@ import styles from "./styles.module.scss";
 import React, { useState, useEffect } from "react";
 import logoImage from "../../assets/Logo.png";
 import shoppingCartIcon from "../../assets/cart.png";
+import { Link } from "react-router-dom";
 
 const Navigation: React.FC = () => {
   const [isTop, setIsTop] = useState(false);
@@ -63,9 +64,9 @@ const Navigation: React.FC = () => {
         }`}
       >
         <div className={styles.logoContainer}>
-          <div className={styles.logo}>
+          <Link to="/" className={styles.logo}>
             <img src={logoImage} alt="logo" />
-          </div>
+          </Link>
         </div>
         {(!isMobile || isMenuOpen) && (
           <div className={styles.mobileMenu}>
@@ -80,9 +81,9 @@ const Navigation: React.FC = () => {
               </div>
             </div>
             <div className={styles.dropdown3}>
-              <div className={styles.dropdownTitle} onClick={handleClick3}>
+              <Link to="/cart" className={styles.dropdownTitle}>
                 Cart
-              </div>
+              </Link>
               <img src={shoppingCartIcon} alt="иконка корзины покупок" />
             </div>
             <div className={styles.dropdown}>
