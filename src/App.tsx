@@ -11,25 +11,28 @@ import Body from "../src/components/Body/body";
 import ProductDetails from "../src/components/ProductDetails/productDetails";
 import Cart from "../src/components/Cart/cart";
 import PageNotFound from "../src/components/404/PageNotFound";
-//import { useAppDispatch, useAppSelector } from './hooks';
-//import { toggleCart } from './store/cartSlice';
+import { Provider } from "react-redux";
+import { store } from "../src/redux/store";
+
+// import AllPrice from "./services/DataPrice/allPrice";
 
 function App() {
-  //const dispatch = useAppDispatch();
-  //const user = useAppSelector((state) => state.user.user);
-
   return (
-    <Router>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Body />} />
-        <Route path="/product/:id" element={<ProductDetails />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/page-not-found" element={<PageNotFound />} />
-        <Route path="*" element={<Navigate to="/page-not-found" />} />
-      </Routes>
-      <Footer />
-    </Router>
+    <Provider store={store}>
+      {/* <AllPrice /> */}
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Body />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
+          {/* <Route path="/product" element={<ProductDetails />} /> */}
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/page-not-found" element={<PageNotFound />} />
+          <Route path="*" element={<Navigate to="/page-not-found" />} />
+        </Routes>
+        <Footer />
+      </Router>
+    </Provider>
   );
 }
 

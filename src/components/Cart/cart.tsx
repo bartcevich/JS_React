@@ -1,20 +1,26 @@
-//import styles from "./styles.module.scss";
-// import Home from "../Home/home";
-import Header from "../Header/header";
-import Footer from "../Footer/footer";
-// import Catalog from "../Catalog/catalog";
-// import FAQ from "../FAQ/faq";
+import styles from "./styles.module.scss";
+import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../redux/store";
+import { selectAllCurrency } from "../../redux/currencySlice";
 
-function Body() {
-  return (
-    <>
-      <Header />
-      {/* <Home />
-      <Catalog />
-      <FAQ /> */}
-      <Footer />
-    </>
-  );
+type currencyState = {
+  ShowProduct: {};
+};
+
+export default function Cart() {
+  // const { id } = useParams<{ id: string }>();
+  // const data = useSelector((state: RootState) => state.currencys.ShowProduct);
+  // const [menuData, setMenuData] = useState<any[]>([]);
+  // const dispatch = useDispatch<AppDispatch>();
+  // const ShowProduct = useSelector<RootState, currencyState>(selectAllCurrency);
+
+  // useEffect(() => {
+  //   // const choiceForComponent = ShowProduct.ShowProduct || {};
+  //   const values = [ShowProduct];
+  //   setMenuData(values);
+  // }, []);
+  // console.log(menuData);
+  return <></>;
 }
-
-export default Body;

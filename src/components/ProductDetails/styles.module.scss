@@ -1,19 +1,101 @@
-.container{
-    
-    height: 590px;
-    background: #484283;
+@import '../../variables.scss';
+.wrapper{
+   background-color: #ffffff;
+    max-width: 1180px;
+    width: 100%;
+    display: flex;
+    gap: 40px;
 }
-.content{
-    width: 1180px;
-    // width: 100%;
-    background-image: url("../../assets/back_text.png");
-    background-repeat: no-repeat;
+.imageContainer{
+    background-color: #C4C4C4;
+    max-width: 520px;
+    width: 100%;
 }
-.textH1{
+.imageProduct{
+    width: 520px;
+}
+.info{
+    max-width: 620px;
+    width: 100%;
+}
+.title{
+    margin: 0;
+    @include font(#444B58, Jost, 35px, normal, 600, 45px, 0px);
+    //font-size: clamp(15px, 2vw, 20px);
+}
+.meta{
+    display: flex;
+    justify-content: space-around;
+}
+.stock{
+    padding: 12px 0;
+    border-top: 2px solid #C4C4C4;
+    border-bottom: 2px solid #C4C4C4;
+    @include font(#F14F4F, Jost, 16px, normal, 700, 27px, 0px);
+    //font-size: clamp(15px, 2vw, 20px);
+}
+.priceContainer{
+    background-color: #D5D5D5;
+    display: flex;
+    justify-content: space-around;
+}
+.price{
+   border-right: 1px solid #D5D5D5; 
+}
+.priceEnd{
+    @include font(#444B58, Jost, 30px, normal, 700, 60px, 0px);
+    //font-size: clamp(15px, 2vw, 20px);
+}
+.priceStart{
+    display: flex;
+    align-items: center;
+}
+.discount{
+    display: flex;
+    align-items: center;
+}
+
+.buttonContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.textH2{
+    margin-top: 12px;
     height: 100px;
     text-align: left;
+    
+    display: flex;
+    align-items: center;
 }
 .text{
-    height: 48px;
+    margin-bottom: 48px;
+    max-width: 1180px;
+    border-radius: 10px;
+    width: 100%;
+    background-color: #F6F6F6;
+    height: 62px;
     text-align: left;
+    @include font(#B2B5BB, Jost, 18px, normal, bold, 25px, -1px);
+    //font-size: clamp(15px, 2vw, 20px);
+}
+.CartIcon2{
+    padding: 0;
+}
+.forButton{
+    display: flex;
+    justify-content: center;
+}
+
+.button{
+    width: 176px;
+    height: 62px;
+    background-color: #F14F4F;
+    border-radius: 5%;
+    color: #ffffff;
+}
+.button:hover{
+    cursor: pointer;
+    background-color: #8C2828;
 }

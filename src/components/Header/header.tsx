@@ -48,10 +48,6 @@ const Navigation: React.FC = () => {
   const handleClick1 = () => {
     //setOpenMenu1((prevValue) => !prevValue);
   };
-  //const [openMenu2, setOpenMenu2] = useState(false);
-  const handleClick2 = () => {
-    //setOpenMenu2((prevValue) => !prevValue);
-  };
   const handleClick3 = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -71,9 +67,9 @@ const Navigation: React.FC = () => {
         {(!isMobile || isMenuOpen) && (
           <div className={styles.mobileMenu}>
             <div className={styles.dropdown}>
-              <div className={styles.dropdownTitle} onClick={handleClick2}>
+              <Link to="/product" className={styles.dropdownTitle}>
                 Catalog
-              </div>
+              </Link>
             </div>
             <div className={styles.dropdown}>
               <div className={styles.dropdownTitle} onClick={handleClick1}>

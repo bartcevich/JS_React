@@ -7,13 +7,13 @@ import FAQ from "../FAQ/faq";
 
 function Body() {
   return (
-    <>
+    <div>
       {/* <Header /> */}
       <Home />
       <Catalog />
       <FAQ />
       {/* <Footer /> */}
-    </>
+    </div>
   );
 }
 
