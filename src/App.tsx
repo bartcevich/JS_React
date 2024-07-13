@@ -25,7 +25,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Body />} />
           <Route path="/product/:id" element={<ProductDetails />} />
-          {/* <Route path="/product" element={<ProductDetails />} /> */}
           <Route path="/cart" element={<Cart />} />
           <Route path="/page-not-found" element={<PageNotFound />} />
           <Route path="*" element={<Navigate to="/page-not-found" />} />

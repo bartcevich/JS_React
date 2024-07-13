@@ -33,7 +33,7 @@ export default function AllPrice() {
     const choiceForComponent = data["products"] || {};
     const values = Object.values(choiceForComponent);
     setMenuData(values);
-    console.log(values);
+    // console.log(values);
   };
 
   useEffect(() => {
@@ -47,7 +47,7 @@ export default function AllPrice() {
   }, [allPrice]);
 
   const onShowProduct = (data: any) => {
-    console.log(data);
+    // console.log(data);
     dispatch(updateShowProduct(data));
     navigate(`/product/${data.id}`);
   };
@@ -81,14 +81,6 @@ export default function AllPrice() {
           </div>
         </div>
       ))}
-
-      {/* <div>
-                <span className={styles.numberServings}>
-                  <button onClick={() => countMinus(menuItem)}>-</button>
-                  {menuItem.numberServings}
-                  <button onClick={() => countPlus(menuItem)}>+</button>
-                </span>
-            </div> */}
     </>
   );
 }

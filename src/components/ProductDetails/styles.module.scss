@@ -25,7 +25,10 @@
 }
 .meta{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+}
+.tag{
+    display: flex;
 }
 .stock{
     padding: 12px 0;
@@ -98,4 +101,10 @@
 .button:hover{
     cursor: pointer;
     background-color: #8C2828;
+}
+.buttonLeft{
+    margin-right: 30px;
+}
+.buttonRight{
+    margin-left: 30px;
 }
