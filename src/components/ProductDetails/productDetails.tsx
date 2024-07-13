@@ -35,8 +35,8 @@ export default function ProductDetails() {
 
   return (
     <>
-      {menuData.map((menuItem, index) => (
-        <div key={index} className={styles.wrapper}>
+      {menuData.map((menuItem, id) => (
+        <div key={id} className={styles.wrapper}>
           <div className={styles.imageContainer}>
             <img
               src={menuItem.thumbnail}

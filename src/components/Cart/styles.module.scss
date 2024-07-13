@@ -9,9 +9,15 @@
 }
 .textH2{
     margin: 130px 0 70px 0;
-    @include font(#B2B5BB, Jost, 36px, normal, bold, 36px, 0px);
+    @include font(#444B58, Jost, 36px, normal, bold, 36px, 0px);
     //font-size: clamp(15px, 2vw, 20px);
 }
+.textH3{
+    margin: 50px 0 400px 0;
+    text-align: center;
+    @include font(#B2B5BB, Jost, 23px, normal, bold, 23px, 0px);
+}
+
 .twoBlock{
     display: flex;
     flex-flow: row;

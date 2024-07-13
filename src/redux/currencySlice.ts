@@ -3,12 +3,14 @@ import { RootState } from "./store";
 
 type currencyState = {
   ShowProduct: {};
+  CartStorage: {};
   Quantity: number;
   EUR: number;
 };
 
 const initialState: currencyState = {
   ShowProduct: {},
+  CartStorage: {},
   Quantity: 0,
   EUR: 0,
 };
@@ -20,6 +22,9 @@ export const currencySlice = createSlice({
     updateShowProduct: (state, action: PayloadAction<{}>) => {
       state.ShowProduct = action.payload;
     },
+    updateCartStorage: (state, action: PayloadAction<{}>) => {
+      state.CartStorage = action.payload;
+    },
     updateQuantity: (state, action: PayloadAction<number>) => {
       state.Quantity = action.payload;
     },
@@ -30,5 +35,5 @@ export const currencySlice = createSlice({
 });
 // export const selectCurrencyState = (state: RootState): currencyState => state.currencys;
 export const selectAllCurrency = (state: RootState): currencyState => state.currencys;
-export const { updateShowProduct, updateQuantity, updateEur } = currencySlice.actions;
+export const { updateShowProduct, updateCartStorage, updateQuantity, updateEur } = currencySlice.actions;
 export default currencySlice.reducer;

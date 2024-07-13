@@ -1,31 +1,12 @@
 import styles from "./styles.module.scss";
 import ProductSearch from "../ProductSearch/catalog";
 import AllPrice from "../../services/DataPrice/allPrice";
-import React, { useEffect, useState } from "react";
-// import shoppingCartIcon2 from "../../assets/Add control.png";
-
-// import ButtonMinus from "../../assets/ButtonMinus.png";
-// import ButtonPlus from "../../assets/ButtonPlus.png";
+import React, { useState } from "react";
 
 function Catalog() {
-  const [answer, setAnswer] = useState("");
-  const [quantity, setQuantity] = useState(1);
-  // const [selectedProduct, setSelectedProduct] = useState<catalogState | null>(
-  //   null
-  // );
-
-  // const onIncrementQuantity = () => {
-  //   setQuantity((prevQuantity) => prevQuantity + 1);
-  // };
-
-  // const onDecrementQuantity = () => {
-  //   if (quantity > 0) {
-  //     setQuantity((prevQuantity) => prevQuantity - 1);
-  //   }
-  // };
-
+  const [numberQuantity, setNumberQuantity] = useState(1);
   const handleClick2 = () => {
-    setAnswer("https://bartcevich.github.io/letter/image/forStore.png");
+    setNumberQuantity(numberQuantity + 12);
   };
 
   return (
@@ -36,7 +17,7 @@ function Catalog() {
           <ProductSearch />
         </div>
         <div className={styles.forCards}>
-          <AllPrice />
+          <AllPrice quantity={numberQuantity} />
         </div>
         <div className={styles.forButton}>
           <button className={styles.button} onClick={handleClick2}>

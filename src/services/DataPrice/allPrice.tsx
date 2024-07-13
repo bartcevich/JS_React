@@ -3,53 +3,62 @@ import styles from "./styles.module.scss";
 import { useNavigate } from "react-router-dom";
 import overlayImage from "../../assets/Hover.png";
 
-import { AppDispatch, RootState } from "../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import { updateShowProduct } from "../../redux/currencySlice";
+import { AppDispatch, RootState } from "../../redux/store";
+import {
+  selectAllCurrency,
+  updateShowProduct,
+} from "../../redux/currencySlice";
+import ButtonPlus from "../../services/ButtonPlus/ButtonPlus";
+import ButtonMinus from "../../services/ButtonMinus/buttonMinus";
+import ButtonCart from "../../services/ButtonCart/buttonCart";
 
-export default function AllPrice() {
-  const [allPrice, setAllPrice] = useState({});
+type currencyState = {
+  ShowProduct: {};
+  Quantity: number;
+  EUR: number;
+};
+
+const AllPrice = (props: any) => {
+  // const [allPrice, setAllPrice] = useState({});
   const [menuData, setMenuData] = useState<any[]>([]);
-  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
+  const ShowProduct = useSelector<RootState, currencyState>(selectAllCurrency);
+  const dispatch = useDispatch<AppDispatch>();
+
+  const savingData = (data: any) => {
+    const choiceForComponent = data["products"] || {};
+    const values = Object.values(choiceForComponent);
+    const mergedArray = [...menuData, ...values];
+    setMenuData(mergedArray);
+    // console.log("f3", data, menuData);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://dummyjson.com/products/search?q=&limit=12&skip=1"
+          `https://dummyjson.com/products/search?q=&limit=12&skip=${props.quantity}`
         );
         const data = await response.json();
-        setAllPrice(data);
+        // setAllPrice(data);
+        savingData(data);
       } catch (error) {
         console.error(error);
       }
     };
     fetchData();
-  }, []);
+  }, [props.quantity]);
 
-  const dataForComponent = () => {
-    const data: any = allPrice;
-    const choiceForComponent = data["products"] || {};
-    const values = Object.values(choiceForComponent);
-    setMenuData(values);
-    // console.log(values);
-  };
-
-  useEffect(() => {
-    if (
-      typeof allPrice === "object" &&
-      allPrice !== null &&
-      Object.keys(allPrice).length > 0
-    ) {
-      dataForComponent();
-    }
-  }, [allPrice]);
-
-  const onShowProduct = (data: any) => {
+  const oneShowProduct = (data: any) => {
     // console.log(data);
     dispatch(updateShowProduct(data));
     navigate(`/product/${data.id}`);
+  };
+
+  const onButtonClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation(); // Prevent event propagation
+    // Add your button click logic here
   };
 
   return (
@@ -58,7 +67,7 @@ export default function AllPrice() {
         <div
           key={index}
           className={styles.menuItem}
-          onClick={() => onShowProduct(menuItem)}
+          onClick={() => oneShowProduct(menuItem)}
         >
           <div className={styles.wrapper}>
             <div className={styles.imageContainer}>
@@ -77,10 +86,28 @@ export default function AllPrice() {
                 <div className={styles.name}>{menuItem.title}</div>
                 <div className={styles.price}>{menuItem.price} $</div>
               </div>
+              <div className={styles.buttonContainer} onClick={onButtonClick}>
+                {ShowProduct.Quantity === 0 ? (
+                  <div className={styles.buttonRight}>
+                    <ButtonCart />
+                  </div>
+                ) : (
+                  <div className={styles.buttonContainer}>
+                    <div className={styles.buttonLeft}>
+                      <ButtonMinus />
+                    </div>
+                    {ShowProduct.Quantity} item
+                    <div className={styles.buttonRight}>
+                      <ButtonPlus />
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
       ))}
     </>
   );
-}
+};
+export default AllPrice;

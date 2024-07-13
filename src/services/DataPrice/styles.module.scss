@@ -1,40 +1,7 @@
 @import '../../variables.scss';
-.container{
-    background-color: #ffffff;
-}
-.content{
-    margin: 0 auto;
-    max-width: 1180px;
-    width: 100%;
-    display: flex;
-    flex-flow: column;
-   
-}
-.textH2{
-    margin-top: 12px;
-    height: 100px;
-    text-align: left;
-    @include font(#444B58, Jost, 37px, normal, 700, 37px, -1px);
-    //font-size: clamp(15px, 2vw, 20px);
-    display: flex;
-    align-items: center;
-}
-.text{
-    margin-bottom: 48px;
-    max-width: 1180px;
-    border-radius: 10px;
-    width: 100%;
-    background-color: #F6F6F6;
-    height: 62px;
-    text-align: left;
-    @include font(#B2B5BB, Jost, 18px, normal, bold, 25px, -1px);
-    //font-size: clamp(15px, 2vw, 20px);
-}
-.forCards{
-    display: flex;
-    flex-flow: wrap;
-    justify-content: center;
-    gap: 20px;
+
+.menuItem{
+    width: min(370px, 100%);
 }
 .menuItem:hover{
     cursor: pointer;
@@ -90,20 +57,35 @@ span{
 .CartIcon2{
     padding: 0;
 }
-.forButton{
+// .forButton{
+//     display: flex;
+//     justify-content: center;
+// }
+
+// .button{
+//     margin: 48px;
+//     width: 180px;
+//     height: 62px;
+//     background-color: #F14F4F;
+//     border-radius: 5%;
+//     color: #ffffff;
+// }
+// .button:hover{
+//     cursor: pointer;
+//     background-color: #8C2828;
+// }
+.buttonContainer{
     display: flex;
     justify-content: center;
+    align-items: center;
 }
-
-.button{
-    margin: 48px;
-    width: 180px;
-    height: 62px;
-    background-color: #F14F4F;
-    border-radius: 5%;
-    color: #ffffff;
+.buttonLeft{
+    margin-right: 20px;
+    width: 50px;
+    height: 50px;
 }
-.button:hover{
-    cursor: pointer;
-    background-color: #8C2828;
+.buttonRight{
+    margin-left: 20px;
+    width: 50px;
+    height: 50px;
 }
