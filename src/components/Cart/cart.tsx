@@ -32,7 +32,7 @@ export default function Cart() {
       try {
         const response = await fetch("https://dummyjson.com/carts/user/15");
         const data = await response.json();
-        // console.log(data);
+        console.log(data);
         dispatch(updateCartStorage(data));
       } catch (error) {
         console.error(error);

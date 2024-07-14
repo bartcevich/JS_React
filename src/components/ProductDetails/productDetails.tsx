@@ -6,6 +6,8 @@ import { AppDispatch, RootState } from "../../redux/store";
 import { selectAllCurrency, updateQuantity } from "../../redux/currencySlice";
 import ButtonPlus from "../../services/ButtonPlus/ButtonPlus";
 import ButtonMinus from "../../services/ButtonMinus/buttonMinus";
+import StarRed from "../../assets/StarRed.svg";
+import Star from "../../assets/Star.svg";
 
 type currencyState = {
   ShowProduct: {};
@@ -27,6 +29,7 @@ export default function ProductDetails() {
     const choiceForComponent = ShowProduct.ShowProduct || {};
     const values = [choiceForComponent];
     setMenuData(values);
+    console.log(values);
   }, []);
 
   const onIncrementQuantity = () => {
@@ -35,68 +38,88 @@ export default function ProductDetails() {
 
   return (
     <>
-      {menuData.map((menuItem, id) => (
-        <div key={id} className={styles.wrapper}>
-          <div className={styles.imageContainer}>
-            <img
-              src={menuItem.thumbnail}
-              alt="Image"
-              className={styles.imageProduct}
-              loading="lazy"
-              decoding="async"
-            />
+      {menuData.map((menuItem, id) => {
+        const discountedPrice =
+          menuItem.price - (menuItem.price * menuItem.discountPercentage) / 100;
+        const rating = Math.round(menuItem.rating);
+        const redStars = Array(rating).fill(
+          <div className={styles.redStar}>
+            <img src={StarRed} alt="StarRed" />
           </div>
-          <div className={styles.info}>
-            <div className={styles.titleContainer}>
-              <p className={styles.title}>{menuItem.title}</p>
-              <div className={styles.meta}>
-                <div className={styles.rating}>{menuItem.rating}</div>
-                <div className={styles.tag}>
-                  {menuItem.tags.map((tag: string, i: number) => (
-                    <p className={styles.selfie}>{tag},</p>
-                  ))}
+        );
+        const yellowStars = Array(5 - rating).fill(
+          <div className={styles.yellowStar}>
+            <img src={Star} alt="Star" />
+          </div>
+        );
+        return (
+          <div key={id} className={styles.wrapper}>
+            <div className={styles.imageContainer}>
+              <img
+                src={menuItem.thumbnail}
+                alt="Image"
+                className={styles.imageProduct}
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div className={styles.info}>
+              <div className={styles.titleContainer}>
+                <p className={styles.title}>{menuItem.title}</p>
+                <div className={styles.meta}>
+                  <div className={styles.rating}>
+                    {redStars}
+                    {yellowStars}
+                  </div>
+                  <div className={styles.tag}>
+                    {menuItem.tags.map((tag: string, i: number) => (
+                      <p className={styles.selfie}>{tag},</p>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-            <p className={styles.stock}>
-              In Stock - Only {menuItem.stock} left!
-            </p>
-            <p className={styles.selfie}>{menuItem.description}</p>
-            <p className={styles.warranty}>{menuItem.warrantyInformation}</p>
-            <p className={styles.shipping}>{menuItem.shippingInformation}</p>
-            <div className={styles.priceContainer}>
-              <div className={styles.price}>
-                <div className={styles.priceEnd}>{menuItem.price} $</div>
-                <div className={styles.priceStart}>0 $</div>
-              </div>
-              <div className={styles.discount}>
-                Your discount: {menuItem.discountPercentage}%
-              </div>
-              <div className={styles.buttonContainer}>
-                {ShowProduct.Quantity === 0 ? (
-                  <button
-                    className={styles.button}
-                    onClick={onIncrementQuantity}
-                  >
-                    Add to cart
-                  </button>
-                ) : (
-                  <div className={styles.buttonContainer}>
-                    <div className={styles.buttonLeft}>
-                      <ButtonMinus />
-                    </div>
-                    {ShowProduct.Quantity} item
-                    <div className={styles.buttonRight}>
-                      <ButtonPlus />
-                    </div>
+              <p className={styles.stock}>
+                In Stock - Only {menuItem.stock} left!
+              </p>
+              <p className={styles.selfie}>{menuItem.description}</p>
+              <p className={styles.warranty}>{menuItem.warrantyInformation}</p>
+              <p className={styles.shipping}>{menuItem.shippingInformation}</p>
+              <div className={styles.priceContainer}>
+                <div className={styles.price}>
+                  <div className={styles.priceEnd}>
+                    {discountedPrice.toFixed(2)} $
                   </div>
-                )}
+                  <div className={styles.priceStart}>{menuItem.price} $</div>
+                </div>
+                <div className={styles.discount}>
+                  Your discount: {menuItem.discountPercentage}%
+                </div>
+                <div className={styles.buttonContainer}>
+                  {ShowProduct.Quantity === 0 ? (
+                    <button
+                      className={styles.button}
+                      onClick={onIncrementQuantity}
+                    >
+                      Add to cart
+                    </button>
+                  ) : (
+                    <div className={styles.buttonContainer}>
+                      <div className={styles.buttonLeft}>
+                        <ButtonMinus />
+                      </div>
+                      {ShowProduct.Quantity} item
+                      <div className={styles.buttonRight}>
+                        <ButtonPlus />
+                      </div>
+                    </div>
+                  )}
+                </div>
+                {/* <p>Product ID: {id}</p> */}
               </div>
-              {/* <p>Product ID: {id}</p> */}
             </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </>
   );
 }

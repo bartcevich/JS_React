@@ -31,7 +31,7 @@ const AllPrice = (props: any) => {
     const values = Object.values(choiceForComponent);
     const mergedArray = [...menuData, ...values];
     setMenuData(mergedArray);
-    // console.log("f3", data, menuData);
+    console.log("f3", data);
   };
 
   useEffect(() => {
@@ -63,50 +63,56 @@ const AllPrice = (props: any) => {
 
   return (
     <>
-      {menuData.map((menuItem, index) => (
-        <div
-          key={index}
-          className={styles.menuItem}
-          onClick={() => oneShowProduct(menuItem)}
-        >
-          <div className={styles.wrapper}>
-            <div className={styles.imageContainer}>
-              <img
-                src={menuItem.thumbnail}
-                alt="Image"
-                loading="lazy"
-                decoding="async"
-              />
-              <div className={styles.hoverContent}>
-                <img src={overlayImage} alt="Image" />
+      {menuData.map((menuItem, index) => {
+        const discountedPrice =
+          menuItem.price - (menuItem.price * menuItem.discountPercentage) / 100;
+        return (
+          <div
+            key={index}
+            className={styles.menuItem}
+            onClick={() => oneShowProduct(menuItem)}
+          >
+            <div className={styles.wrapper}>
+              <div className={styles.imageContainer}>
+                <img
+                  src={menuItem.thumbnail}
+                  alt="Image"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div className={styles.hoverContent}>
+                  <img src={overlayImage} alt="Image" />
+                </div>
               </div>
-            </div>
-            <div className={styles.description}>
-              <div className={styles.label}>
-                <div className={styles.name}>{menuItem.title}</div>
-                <div className={styles.price}>{menuItem.price} $</div>
-              </div>
-              <div className={styles.buttonContainer} onClick={onButtonClick}>
-                {ShowProduct.Quantity === 0 ? (
-                  <div className={styles.buttonRight}>
-                    <ButtonCart />
+              <div className={styles.description}>
+                <div className={styles.label}>
+                  <div className={styles.name}>{menuItem.title}</div>
+                  <div className={styles.price}>
+                    {discountedPrice.toFixed(2)} $
                   </div>
-                ) : (
-                  <div className={styles.buttonContainer}>
-                    <div className={styles.buttonLeft}>
-                      <ButtonMinus />
-                    </div>
-                    {ShowProduct.Quantity} item
+                </div>
+                <div className={styles.buttonContainer} onClick={onButtonClick}>
+                  {ShowProduct.Quantity === 0 ? (
                     <div className={styles.buttonRight}>
-                      <ButtonPlus />
+                      <ButtonCart />
                     </div>
-                  </div>
-                )}
+                  ) : (
+                    <div className={styles.buttonContainer}>
+                      <div className={styles.buttonLeft}>
+                        <ButtonMinus />
+                      </div>
+                      {ShowProduct.Quantity} item
+                      <div className={styles.buttonRight}>
+                        <ButtonPlus />
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </>
   );
 };
