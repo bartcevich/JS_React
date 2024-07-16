@@ -13,6 +13,7 @@ import Cart from "../src/components/Cart/cart";
 import PageNotFound from "../src/components/404/PageNotFound";
 import { Provider } from "react-redux";
 import { store } from "../src/redux/store";
+import "./App.css";
 
 // import AllPrice from "./services/DataPrice/allPrice";
 
@@ -22,13 +23,15 @@ function App() {
       {/* <AllPrice /> */}
       <Router>
         <Header />
-        <Routes>
-          <Route path="/" element={<Body />} />
-          <Route path="/product/:id" element={<ProductDetails />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/page-not-found" element={<PageNotFound />} />
-          <Route path="*" element={<Navigate to="/page-not-found" />} />
-        </Routes>
+        <main className="mainContainer">
+          <Routes>
+            <Route path="/" element={<Body />} />
+            <Route path="/product/:id" element={<ProductDetails />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/page-not-found" element={<PageNotFound />} />
+            <Route path="*" element={<Navigate to="/page-not-found" />} />
+          </Routes>
+        </main>
         <Footer />
       </Router>
     </Provider>
