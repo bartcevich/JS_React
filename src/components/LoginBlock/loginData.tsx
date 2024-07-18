@@ -2,7 +2,19 @@ import styles from "./styles.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../redux/store";
+import {
+  selectAllData,
+  updateCartData,
+  updateCardID,
+  updateFirstName,
+  updateLastName,
+} from "../../redux/cartSlice";
+
 export default function LoginData() {
+  const dispatch = useDispatch<AppDispatch>();
+  dispatch(updateCartData({}));
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -20,12 +32,28 @@ export default function LoginData() {
       .then((res) => res.json())
       .then((data) => {
         localStorage.setItem("dataUser", JSON.stringify(data));
-        oneShowProduct();
-        console.log(data);
+        dataInRedux(data); //save in state
       });
   };
 
-  const oneShowProduct = () => {
+  const dataInRedux = (data: any) => {
+    // let parsedCurrentAuth: any = {};
+    if (
+      typeof data === "object" &&
+      data !== null &&
+      Object.keys(data).length > 0
+    ) {
+      // parsedCurrentAuth = data;
+      console.log(data.id);
+    }
+    dispatch(updateCardID(data.id));
+    dispatch(updateFirstName(data.firstName));
+    dispatch(updateLastName(data.lastName));
+    // localStorage.setItem("dataUser", JSON.stringify(parsedCurrentAuth.token));
+    checkoutHome();
+  };
+
+  const checkoutHome = () => {
     navigate("/");
   };
 

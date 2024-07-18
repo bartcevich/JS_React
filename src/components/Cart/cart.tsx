@@ -1,56 +1,39 @@
 import styles from "./styles.module.scss";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import ButtonPlus from "../../services/ButtonPlus/ButtonPlus";
 import ButtonMinus from "../../services/ButtonMinus/buttonMinus";
 
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
-import {
-  selectAllCurrency,
-  updateCartStorage,
-} from "../../redux/currencySlice";
+import { selectAllData } from "../../redux/cartSlice";
 
-type currencyState = {
-  CartStorage: {};
-  ShowProduct: {};
-  Quantity: number;
-  EUR: number;
+type cartState = {
+  CartData: {};
+  CardID: number;
+  firstName: string;
+  lastName: string;
 };
 
 export default function Cart() {
   const [basketEmpty, setBasketEmpty] = useState(false);
   const [menuData, setMenuData] = useState<any[]>([]);
-  const ShowProduct = useSelector<RootState, currencyState>(selectAllCurrency);
+  // const ShowProduct = useSelector<RootState, currencyState>(selectAllCurrency);
+  const ShowProduct2 = useSelector<RootState, cartState>(selectAllData);
   const dispatch = useDispatch<AppDispatch>();
   // const { Quantity }: any = useSelector<RootState, currencyState>(
   //   selectAllCurrency
   // );
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("https://dummyjson.com/carts/user/15");
-        const data = await response.json();
-        console.log(data);
-        dispatch(updateCartStorage(data));
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchData();
-  }, []);
-
-  const dataForComponent = () => {
-    const data: any = ShowProduct.CartStorage;
-    const choiceForComponent = data["carts"] || {};
-    const values = Object.values(choiceForComponent);
-    setMenuData(values);
-    // console.log(values);
+  const dataFromCartSlice = () => {
+    const data: any = ShowProduct2.CartData;
+    // const objectFromArray = data[0] || {};
+    // const values = Object.values(objectFromArray);
+    setMenuData(data);
   };
 
   const deleteMenuItem = (id: number) => {
-    console.log(ShowProduct);
+    // console.log(ShowProduct);
     const updatedMenuData = menuData.map((item) => {
       const updatedProducts = item.products.filter(
         (menuProduct: any) => menuProduct.id !== id
@@ -63,16 +46,15 @@ export default function Cart() {
   };
 
   useEffect(() => {
-    // console.log(ShowProduct.CartStorage);
     if (
-      typeof ShowProduct.CartStorage === "object" &&
-      ShowProduct.CartStorage !== null &&
-      Object.keys(ShowProduct.CartStorage).length > 0
+      typeof ShowProduct2.CartData === "object" &&
+      ShowProduct2.CartData !== null &&
+      Object.keys(ShowProduct2.CartData).length > 0
     ) {
       setBasketEmpty(true);
-      dataForComponent();
+      dataFromCartSlice();
     }
-  }, [ShowProduct]);
+  }, [ShowProduct2]);
 
   return (
     <>

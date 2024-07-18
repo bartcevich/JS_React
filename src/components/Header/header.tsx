@@ -4,10 +4,21 @@ import logoImage from "../../assets/Logo.png";
 import shoppingCartIcon from "../../assets/cart.png";
 import { Link } from "react-router-dom";
 
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../redux/store";
+import { selectAllData, updateCartData } from "../../redux/cartSlice";
+type cartState = {
+  CartData: {};
+  CardID: number;
+  firstName: string;
+  lastName: string;
+};
+
 const Navigation: React.FC = () => {
   const [isTop, setIsTop] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const headerDataUser = useSelector<RootState, cartState>(selectAllData);
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -83,9 +94,11 @@ const Navigation: React.FC = () => {
               <img src={shoppingCartIcon} alt="иконка корзины покупок" />
             </div>
             <div className={styles.dropdown}>
-              <div className={styles.dropdownTitle} onClick={handleClick3}>
-                Johnson Smith
-              </div>
+              {headerDataUser.CardID !== -5 && (
+                <div className={styles.dropdownTitle} onClick={handleClick3}>
+                  {headerDataUser.firstName} {headerDataUser.lastName}
+                </div>
+              )}
             </div>
           </div>
         )}
