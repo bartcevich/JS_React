@@ -11,6 +11,7 @@ import Body from "../src/components/Body/body";
 import ProductDetails from "../src/components/ProductDetails/productDetails";
 import Cart from "../src/components/Cart/cart";
 import PageNotFound from "../src/components/404/PageNotFound";
+import LoginData from "./components/LoginBlock/loginData";
 import { Provider } from "react-redux";
 import { store } from "../src/redux/store";
 import "./App.css";
@@ -30,6 +31,7 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/page-not-found" element={<PageNotFound />} />
             <Route path="*" element={<Navigate to="/page-not-found" />} />
+            <Route path="/login" element={<LoginData />} />
           </Routes>
         </main>
         <Footer />

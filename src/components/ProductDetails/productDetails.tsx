@@ -8,6 +8,7 @@ import ButtonPlus from "../../services/ButtonPlus/ButtonPlus";
 import ButtonMinus from "../../services/ButtonMinus/buttonMinus";
 import StarRed from "../../assets/StarRed.svg";
 import Star from "../../assets/Star.svg";
+import ImgProductDetails from "../ImgProductDetails/imgProductDetails";
 
 type currencyState = {
   ShowProduct: {};
@@ -55,13 +56,7 @@ export default function ProductDetails() {
         return (
           <div key={id} className={styles.wrapper}>
             <div className={styles.imageContainer}>
-              <img
-                src={menuItem.thumbnail}
-                alt="Image"
-                className={styles.imageProduct}
-                loading="lazy"
-                decoding="async"
-              />
+              <ImgProductDetails />
             </div>
             <div className={styles.info}>
               <div className={styles.titleContainer}>
@@ -73,7 +68,9 @@ export default function ProductDetails() {
                   </div>
                   <div className={styles.tag}>
                     {menuItem.tags.map((tag: string, i: number) => (
-                      <p className={styles.selfie}>{tag},</p>
+                      <p key={i} className={styles.selfie}>
+                        {tag},
+                      </p>
                     ))}
                   </div>
                 </div>
