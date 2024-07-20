@@ -2,6 +2,7 @@ import styles from "./styles.module.scss";
 import React, { useState, useEffect } from "react";
 import logoImage from "../../assets/Logo.png";
 import shoppingCartIcon from "../../assets/cart.png";
+import NumberUnits from "../../services/NunberUnits/NumberUnits";
 import { Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -90,6 +91,7 @@ const Navigation: React.FC = () => {
             <div className={styles.dropdown3}>
               <Link to="/cart" className={styles.dropdownTitle}>
                 Cart
+                <NumberUnits />
               </Link>
               <img src={shoppingCartIcon} alt="иконка корзины покупок" />
             </div>

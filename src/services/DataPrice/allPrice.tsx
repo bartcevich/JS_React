@@ -2,13 +2,16 @@ import React, { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import { useNavigate } from "react-router-dom";
 import overlayImage from "../../assets/Hover.png";
+import UpdateCard from "../UpdateCart/updateCart";
 
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import {
   selectAllCurrency,
   updateShowProduct,
+  updateEur,
 } from "../../redux/currencySlice";
+import { selectAllData, updateShowProduct2 } from "../../redux/cartSlice";
 import ButtonPlus from "../../services/ButtonPlus/ButtonPlus";
 import ButtonMinus from "../../services/ButtonMinus/buttonMinus";
 import ButtonCart from "../../services/ButtonCart/buttonCart";
@@ -50,15 +53,34 @@ const AllPrice = (props: any) => {
     fetchData();
   }, [props.quantity]);
 
+  const objectForCart = (data: any) => {
+    let discountedTotal =
+      data.price - (data.price / 100) * data.discountPercentage;
+    const newProducts = {
+      discountPercentage: data.discountPercentage,
+      id: data.id,
+      price: data.price,
+      quantity: 1,
+      thumbnail: data.thumbnail,
+      total: data.price,
+      title: data.title,
+      discountedTotal: discountedTotal,
+    };
+    dispatch(updateShowProduct(newProducts));
+    console.log(newProducts);
+  };
+
   const oneShowProduct = (data: any) => {
     // console.log(data);
-    dispatch(updateShowProduct(data));
+    objectForCart(data);
+    dispatch(updateShowProduct2(data));
     navigate(`/product/${data.id}`);
   };
 
-  const onButtonClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    event.stopPropagation(); // Prevent event propagation
-    // Add your button click logic here
+  const onButtonClick = (event: any, data: any) => {
+    event.stopPropagation();
+    objectForCart(data);
+    dispatch(updateEur(1));
   };
 
   return (
@@ -91,7 +113,11 @@ const AllPrice = (props: any) => {
                     {discountedPrice.toFixed(2)} $
                   </div>
                 </div>
-                <div className={styles.buttonContainer} onClick={onButtonClick}>
+                <div
+                  key={index}
+                  className={styles.buttonContainer}
+                  onClick={(event) => onButtonClick(event, menuItem)}
+                >
                   {ShowProduct.Quantity === 0 ? (
                     <div className={styles.buttonRight}>
                       <ButtonCart />
@@ -113,6 +139,7 @@ const AllPrice = (props: any) => {
           </div>
         );
       })}
+      <UpdateCard />
     </>
   );
 };

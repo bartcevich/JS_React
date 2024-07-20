@@ -1,0 +1,16 @@
+@import '../../variables.scss';
+
+.buttonImg{
+    width: min(70px, 100%);
+    height: min(62px, 100%);
+    background-color: #F14F4F;
+    border-radius: 5%;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.buttonImg:hover{
+    cursor: pointer;
+    background-color: #8C2828;
+}

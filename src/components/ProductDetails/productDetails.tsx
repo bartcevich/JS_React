@@ -1,36 +1,47 @@
 import styles from "./styles.module.scss";
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../redux/store";
-import { selectAllCurrency, updateQuantity } from "../../redux/currencySlice";
 import ButtonPlus from "../../services/ButtonPlus/ButtonPlus";
 import ButtonMinus from "../../services/ButtonMinus/buttonMinus";
 import StarRed from "../../assets/StarRed.svg";
 import Star from "../../assets/Star.svg";
 import ImgProductDetails from "../ImgProductDetails/imgProductDetails";
 
+import { selectAllCurrency, updateQuantity } from "../../redux/currencySlice";
 type currencyState = {
   ShowProduct: {};
   Quantity: number;
   EUR: number;
 };
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../redux/store";
+import { selectAllData } from "../../redux/cartSlice";
+type cartState = {
+  CartData: {};
+  ShowProduct2: {};
+  CardID: number;
+  numberUnits: number;
+  firstName: string;
+  lastName: string;
+};
 
 export default function ProductDetails() {
-  const { id } = useParams<{ id: string }>();
+  // const { id2 } = useParams<{ id: string }>();
   const data = useSelector((state: RootState) => state.currencys.ShowProduct);
   const [menuData, setMenuData] = useState<any[]>([]);
+
   const dispatch = useDispatch<AppDispatch>();
+  const ShowProduct2 = useSelector<RootState, cartState>(selectAllData);
   const ShowProduct = useSelector<RootState, currencyState>(selectAllCurrency);
   const { Quantity }: any = useSelector<RootState, currencyState>(
     selectAllCurrency
   );
 
   useEffect(() => {
-    const choiceForComponent = ShowProduct.ShowProduct || {};
+    const choiceForComponent = ShowProduct2.ShowProduct2 || {};
     const values = [choiceForComponent];
     setMenuData(values);
-    console.log(values);
+    console.log(ShowProduct2.ShowProduct2);
   }, []);
 
   const onIncrementQuantity = () => {

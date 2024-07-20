@@ -1,22 +1,26 @@
 import styles from "./styles.module.scss";
 import React, { useEffect, useState } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
-import { selectAllCurrency, updateQuantity } from "../../redux/currencySlice";
-
-type currencyState = {
-  ShowProduct: {};
-  Quantity: number;
-  EUR: number;
+import { selectAllData } from "../../redux/cartSlice";
+type cartState = {
+  CartData: {};
+  ShowProduct2: {};
+  CardID: number;
+  numberUnits: number;
+  firstName: string;
+  lastName: string;
 };
 
 export default function ImgProductDetails() {
   const [menuData, setMenuData] = useState<any[]>([]);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-  const ShowProduct = useSelector<RootState, currencyState>(selectAllCurrency);
+  // const ShowProduct = useSelector<RootState, currencyState>(selectAllCurrency);
+  const ShowProduct2 = useSelector<RootState, cartState>(selectAllData);
 
   useEffect(() => {
-    const choiceForComponent = ShowProduct.ShowProduct || {};
+    const choiceForComponent = ShowProduct2.ShowProduct2 || {};
     const values = [choiceForComponent];
     setMenuData(values);
     console.log(values);

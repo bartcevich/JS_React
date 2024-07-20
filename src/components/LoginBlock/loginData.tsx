@@ -1,6 +1,6 @@
 import styles from "./styles.module.scss";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
@@ -11,13 +11,27 @@ import {
   updateFirstName,
   updateLastName,
 } from "../../redux/cartSlice";
+type cartState = {
+  CartData: {};
+  CardID: number;
+  firstName: string;
+  lastName: string;
+};
 
 export default function LoginData() {
   const dispatch = useDispatch<AppDispatch>();
-  dispatch(updateCartData({}));
+  const headerDataUser = useSelector<RootState, cartState>(selectAllData);
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  // useEffect(() => {
+  //   if (headerDataUser.firstName !== "") {
+  //     navigate("/");
+  //   } else {
+  //     console.log("testIf2", headerDataUser.firstName);
+  //   }
+  // }, [headerDataUser.firstName]);
 
   const handleLogin = () => {
     fetch("https://dummyjson.com/auth/login", {
@@ -31,28 +45,26 @@ export default function LoginData() {
     })
       .then((res) => res.json())
       .then((data) => {
-        localStorage.setItem("dataUser", JSON.stringify(data));
-        dataInRedux(data); //save in state
+        dataInRedux(data);
       });
   };
 
   const dataInRedux = (data: any) => {
-    // let parsedCurrentAuth: any = {};
     if (
       typeof data === "object" &&
       data !== null &&
       Object.keys(data).length > 0
     ) {
-      // parsedCurrentAuth = data;
-      console.log(data.id);
+      // console.log(data);
+      const forToken = { token: data.token };
+      localStorage.setItem("dataUser", JSON.stringify(forToken));
+      // dispatch(updateCardID(data.id));
+      // dispatch(updateFirstName(data.firstName));
+      // dispatch(updateLastName(data.lastName));
     }
-    dispatch(updateCardID(data.id));
-    dispatch(updateFirstName(data.firstName));
-    dispatch(updateLastName(data.lastName));
-    // localStorage.setItem("dataUser", JSON.stringify(parsedCurrentAuth.token));
     checkoutHome();
   };
-
+  // console.log("testIf", headerDataUser.firstName);
   const checkoutHome = () => {
     navigate("/");
   };

@@ -3,23 +3,24 @@ import Home from "../Home/home";
 import Catalog from "../Catalog/catalog";
 import FAQ from "../FAQ/faq";
 import { useNavigate } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
-import { selectAllData, updateCartData } from "../../redux/cartSlice";
-
-type cartState = {
-  CartData: {};
-  CardID: number;
-  firstName: string;
-  lastName: string;
-};
+import {
+  updateCartData,
+  updateCardID,
+  updateFirstName,
+  updateLastName,
+  updateTotalProducts,
+  updateTotal,
+  updateDiscountedTotal,
+} from "../../redux/cartSlice";
 
 export default function Body() {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  const cartUserId = useSelector<RootState, cartState>(selectAllData);
+  // const cartUserId = useSelector<RootState, cartState>(selectAllData);
 
   const currentAuth: any = localStorage.getItem("dataUser");
   let parsedCurrentAuth: any = {};
@@ -40,6 +41,7 @@ export default function Body() {
         return res.json();
       })
       .then((data) => {
+        dataInRedux(data);
         // console.log(data);
       })
       .catch((error) => {
@@ -48,21 +50,37 @@ export default function Body() {
       });
   }, []);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `https://dummyjson.com/carts/user/${cartUserId.CardID}`
-        );
-        const data = await response.json();
-        console.log(data["carts"]);
-        dispatch(updateCartData(data["carts"]));
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchData();
-  }, []);
+  const fetchData = async (data1: any) => {
+    try {
+      const response = await fetch(
+        `https://dummyjson.com/carts/user/${data1.id}`
+      );
+      const data = await response.json();
+      const carts = data.carts;
+      const objectFromArray = carts[0] || {};
+      dispatch(updateTotalProducts(objectFromArray.totalProducts));
+      dispatch(updateTotal(objectFromArray.total));
+      dispatch(updateDiscountedTotal(objectFromArray.discountedTotal));
+      dispatch(updateCartData(objectFromArray.products));
+      console.log(objectFromArray.products);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const dataInRedux = (data: any) => {
+    if (
+      typeof data === "object" &&
+      data !== null &&
+      Object.keys(data).length > 0
+    ) {
+      console.log(data);
+      dispatch(updateCardID(data.id));
+      dispatch(updateFirstName(data.firstName));
+      dispatch(updateLastName(data.lastName));
+      fetchData(data);
+    }
+  };
 
   return (
     <div className={styles.bodyWrapper}>
