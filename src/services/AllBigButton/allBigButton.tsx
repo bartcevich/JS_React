@@ -12,7 +12,7 @@ type currencyState = {
   EUR: number;
 };
 
-export default function ButtonMinus() {
+export default function AllBigButton() {
   const dispatch = useDispatch<AppDispatch>();
   const { Quantity }: any = useSelector<RootState, currencyState>(
     selectAllCurrency
@@ -22,9 +22,5 @@ export default function ButtonMinus() {
     dispatch(updateQuantity(Quantity > 0 ? Quantity - 1 : 0));
   };
 
-  return (
-    <button className={styles.buttonImg} onClick={onIncrementQuantity}>
-      <img src={ButtonPlusImg} alt="Button Plus" />
-    </button>
-  );
+  return <div className={styles.buttonImg}>Sign in</div>;
 }

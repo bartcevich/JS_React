@@ -3,6 +3,7 @@ import styles from "./styles.module.scss";
 import React, { useEffect, useState } from "react";
 import ButtonPlus from "../../services/ButtonPlus/ButtonPlus";
 import ButtonMinus from "../../services/ButtonMinus/buttonMinus";
+import ButtonCart from "../../services/ButtonCart/buttonCart";
 
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
@@ -20,6 +21,8 @@ type cartState = {
 };
 
 export default function Cart() {
+  const [selectedProducts, setSelectedProducts] = useState<number[]>([]);
+
   const [basketEmpty, setBasketEmpty] = useState(false);
   const [menuData, setMenuData] = useState<any[]>([]);
   // const ShowProduct = useSelector<RootState, currencyState>(selectAllCurrency);
@@ -38,14 +41,11 @@ export default function Cart() {
   };
 
   const deleteMenuItem = (id: number) => {
-    const updatedMenuData = menuData.map((item) => {
-      const updatedProducts = item.products.filter(
-        (menuProduct: any) => menuProduct.id !== id
-      );
-      return { ...item, products: updatedProducts };
-    });
-    // dispatch(updateCartStorage(data));
-    setMenuData(updatedMenuData);
+    if (selectedProducts.includes(id)) {
+      setSelectedProducts(selectedProducts.filter((pId) => pId !== id));
+    } else {
+      setSelectedProducts([...selectedProducts, id]);
+    }
   };
 
   useEffect(() => {
@@ -81,30 +81,66 @@ export default function Cart() {
                         loading="lazy"
                         decoding="async"
                       />
+                      <div
+                        className={`${
+                          selectedProducts.includes(menuProduct.id)
+                            ? styles.overlay
+                            : ""
+                        }`}
+                      />
                       <div className={styles.textP}>
-                        <div className={styles.totalCount}>
+                        <div
+                          className={`${
+                            selectedProducts.includes(menuProduct.id)
+                              ? styles.totalCount
+                              : styles.totalCount2
+                          }`}
+                        >
                           {menuProduct.title}
                         </div>
-                        <div className={styles.without}>
+                        <div
+                          className={`${
+                            selectedProducts.includes(menuProduct.id)
+                              ? styles.without
+                              : styles.totalCount2
+                          }`}
+                        >
                           {discountedPrice.toFixed(2)} $
                         </div>
                       </div>
                       <div className={styles.buttonDiv}>
-                        <div className={styles.buttonLeft}>
-                          <ButtonMinus />
+                        <div key={index} className={styles.buttonDiv}>
+                          {selectedProducts.includes(menuProduct.id) ? (
+                            <div className={styles.buttonOne}>
+                              <div
+                                className={styles.buttonRight}
+                                onClick={() => deleteMenuItem(menuProduct.id)}
+                              >
+                                <ButtonCart />
+                              </div>
+                            </div>
+                          ) : (
+                            <div className={styles.buttonDiv}>
+                              <div className={styles.buttonInLine}>
+                                <div className={styles.buttonLeft}>
+                                  <ButtonMinus />
+                                </div>
+                                <div className={styles.buttonItem}>
+                                  {menuProduct.quantity}item
+                                </div>
+                                <div className={styles.buttonRight}>
+                                  <ButtonPlus />
+                                </div>
+                              </div>
+                              <div
+                                className={styles.deleteButton}
+                                onClick={() => deleteMenuItem(menuProduct.id)}
+                              >
+                                Delete
+                              </div>
+                            </div>
+                          )}
                         </div>
-                        <div className={styles.buttonItem}>
-                          {menuProduct.quantity}item
-                        </div>
-                        <div className={styles.buttonRight}>
-                          <ButtonPlus />
-                        </div>
-                        <button
-                          className={styles.buttonDelete}
-                          onClick={() => deleteMenuItem(menuProduct.id)}
-                        >
-                          Delete
-                        </button>
                       </div>
                     </div>
                   );
@@ -119,13 +155,15 @@ export default function Cart() {
                 </div>
                 <div className={styles.textPrice}>
                   <div className={styles.without}>Price without discount</div>
-                  <div className={styles.without2}>{ShowProduct2.total}$</div>
+                  <div className={styles.without2}>
+                    {ShowProduct2.total.toFixed(2)}$
+                  </div>
                 </div>
                 <div className={styles.line}></div>
                 <div className={styles.textPrice}>
                   <div className={styles.total}>Total price</div>
                   <div className={styles.total2}>
-                    {ShowProduct2.discountedTotal}$
+                    {ShowProduct2.discountedTotal.toFixed(2)}$
                   </div>
                 </div>
               </div>

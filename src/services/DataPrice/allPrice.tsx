@@ -23,6 +23,7 @@ type currencyState = {
 };
 
 const AllPrice = (props: any) => {
+  const [selectedProduct, setSelectedProduct] = useState<any>(null);
   // const [allPrice, setAllPrice] = useState({});
   const [menuData, setMenuData] = useState<any[]>([]);
   const navigate = useNavigate();
@@ -57,14 +58,14 @@ const AllPrice = (props: any) => {
     let discountedTotal =
       data.price - (data.price / 100) * data.discountPercentage;
     const newProducts = {
-      discountPercentage: data.discountPercentage,
+      // discountPercentage: data.discountPercentage,
       id: data.id,
-      price: data.price,
+      // price: data.price,
       quantity: 1,
-      thumbnail: data.thumbnail,
-      total: data.price,
-      title: data.title,
-      discountedTotal: discountedTotal,
+      // thumbnail: data.thumbnail,
+      // total: data.price,
+      // title: data.title,
+      // discountedTotal: discountedTotal,
     };
     dispatch(updateShowProduct(newProducts));
     console.log(newProducts);
@@ -79,6 +80,7 @@ const AllPrice = (props: any) => {
 
   const onButtonClick = (event: any, data: any) => {
     event.stopPropagation();
+    setSelectedProduct(data);
     objectForCart(data);
     dispatch(updateEur(1));
   };
@@ -118,11 +120,7 @@ const AllPrice = (props: any) => {
                   className={styles.buttonContainer}
                   onClick={(event) => onButtonClick(event, menuItem)}
                 >
-                  {ShowProduct.Quantity === 0 ? (
-                    <div className={styles.buttonRight}>
-                      <ButtonCart />
-                    </div>
-                  ) : (
+                  {selectedProduct?.id === menuItem.id ? (
                     <div className={styles.buttonContainer}>
                       <div className={styles.buttonLeft}>
                         <ButtonMinus />
@@ -131,6 +129,10 @@ const AllPrice = (props: any) => {
                       <div className={styles.buttonRight}>
                         <ButtonPlus />
                       </div>
+                    </div>
+                  ) : (
+                    <div className={styles.buttonRight}>
+                      <ButtonCart />
                     </div>
                   )}
                 </div>

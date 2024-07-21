@@ -6,8 +6,13 @@ import ButtonMinus from "../../services/ButtonMinus/buttonMinus";
 import StarRed from "../../assets/StarRed.svg";
 import Star from "../../assets/Star.svg";
 import ImgProductDetails from "../ImgProductDetails/imgProductDetails";
+import UpdateCard from "../../services/UpdateCart/updateCart";
 
-import { selectAllCurrency, updateQuantity } from "../../redux/currencySlice";
+import {
+  selectAllCurrency,
+  updateQuantity,
+  updateEur,
+} from "../../redux/currencySlice";
 type currencyState = {
   ShowProduct: {};
   Quantity: number;
@@ -46,6 +51,13 @@ export default function ProductDetails() {
 
   const onIncrementQuantity = () => {
     dispatch(updateQuantity(Quantity + 1));
+    dispatch(updateEur(1));
+    console.log("big", ShowProduct.ShowProduct);
+  };
+
+  const onButtonClick = () => {
+    dispatch(updateEur(1));
+    console.log("small", ShowProduct.ShowProduct);
   };
 
   return (
@@ -116,7 +128,10 @@ export default function ProductDetails() {
                         <ButtonMinus />
                       </div>
                       {ShowProduct.Quantity} item
-                      <div className={styles.buttonRight}>
+                      <div
+                        className={styles.buttonRight}
+                        onClick={() => onButtonClick()}
+                      >
                         <ButtonPlus />
                       </div>
                     </div>
@@ -128,6 +143,7 @@ export default function ProductDetails() {
           </div>
         );
       })}
+      <UpdateCard />
     </>
   );
 }

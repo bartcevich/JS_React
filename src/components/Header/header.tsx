@@ -13,6 +13,7 @@ type cartState = {
   CardID: number;
   firstName: string;
   lastName: string;
+  totalProducts: number;
 };
 
 const Navigation: React.FC = () => {
@@ -79,9 +80,7 @@ const Navigation: React.FC = () => {
         {(!isMobile || isMenuOpen) && (
           <div className={styles.mobileMenu}>
             <div className={styles.dropdown}>
-              <Link to="/product" className={styles.dropdownTitle}>
-                Catalog
-              </Link>
+              <div className={styles.dropdownTitle}>Catalog</div>
             </div>
             <div className={styles.dropdown}>
               <div className={styles.dropdownTitle} onClick={handleClick1}>
@@ -91,9 +90,11 @@ const Navigation: React.FC = () => {
             <div className={styles.dropdown3}>
               <Link to="/cart" className={styles.dropdownTitle}>
                 Cart
-                <NumberUnits />
               </Link>
               <img src={shoppingCartIcon} alt="иконка корзины покупок" />
+              <div className={styles.dropdown3absolute}>
+                {headerDataUser.totalProducts}
+              </div>
             </div>
             <div className={styles.dropdown}>
               {headerDataUser.CardID !== -5 && (

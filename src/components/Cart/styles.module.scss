@@ -1,5 +1,6 @@
 @import '../../variables.scss';
 .wrapper{
+    margin: 0 auto;
     margin-bottom: 150px;
     width: min(1180px, 100%);
     // max-width: 1180px;
@@ -30,6 +31,7 @@
     border: 1px solid #c4c4c4;
 }
 .imageWrapper{
+    position: relative;
     display: flex;
     margin: 25px 0;
 }
@@ -37,6 +39,14 @@
     width: 100px;
     background-color: #B2B5BB;
 }
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 15%;
+    height: 100%;
+    background-color: rgba(243, 236, 236, 0.5); // Цвет и прозрачность затемнения
+  }
 .textP{
     padding-left: 10px;
     width: 280px;
@@ -48,14 +58,27 @@
     @include font(#444B58, Jost, 18px, normal, 700, 21px, 0px);
     //font-size: clamp(15px, 2vw, 20px);
 }
+
 .without{
     @include font(#444B58, Jost, 17px, normal, 300, 25px, 0px);
     //font-size: clamp(15px, 2vw, 20px);
+}
+.totalCount2{
+    @include font(#B2B5BB, Jost, 18px, normal, 700, 21px, 0px);
 }
 .buttonDiv{
     width: 288px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+.buttonInLine{
+    display: flex;
+}
+.buttonOne{
+    width: 288px;
+    display: flex;
+    justify-content: flex-end;
     align-items: center;
 }
 .buttonLeft{

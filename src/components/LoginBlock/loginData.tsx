@@ -1,6 +1,7 @@
 import styles from "./styles.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import AllBigButton from "../../services/AllBigButton/allBigButton";
 
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
@@ -70,28 +71,31 @@ export default function LoginData() {
   };
 
   return (
-    <div className={styles.loginWrapper}>
-      <div className={styles.inputContainer}>
-        <label htmlFor="username">Username:</label>
-        <input
-          type="text"
-          id="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+    <>
+      <div className={styles.wrapper1}>
+        <h2 className={styles.textH2}>Sign in</h2>
+        <div className={styles.borderInput}>
+          <input
+            className={styles.inputContainer}
+            type="text"
+            id="username"
+            placeholder="Login"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <input
+            className={styles.inputContainer}
+            type="password"
+            id="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button className={styles.loginButton} onClick={handleLogin}>
+            <AllBigButton />
+          </button>
+        </div>
       </div>
-      <div className={styles.inputContainer}>
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-      <button className={styles.loginButton} onClick={handleLogin}>
-        Sign in
-      </button>
-    </div>
+    </>
   );
 }

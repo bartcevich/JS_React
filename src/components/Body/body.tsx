@@ -10,6 +10,7 @@ import { AppDispatch, RootState } from "../../redux/store";
 import {
   updateCartData,
   updateCardID,
+  updateIDforUpdateCart,
   updateFirstName,
   updateLastName,
   updateTotalProducts,
@@ -58,11 +59,12 @@ export default function Body() {
       const data = await response.json();
       const carts = data.carts;
       const objectFromArray = carts[0] || {};
+      dispatch(updateIDforUpdateCart(objectFromArray.id));
       dispatch(updateTotalProducts(objectFromArray.totalProducts));
       dispatch(updateTotal(objectFromArray.total));
       dispatch(updateDiscountedTotal(objectFromArray.discountedTotal));
       dispatch(updateCartData(objectFromArray.products));
-      console.log(objectFromArray.products);
+      console.log(data);
     } catch (error) {
       console.error(error);
     }

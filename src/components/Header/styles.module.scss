@@ -104,7 +104,21 @@
 }
 .dropdown3{
   display: flex;
+  position: relative;
 }
+.dropdown3absolute{
+  background-color: #F14F4F;
+    font-size: 12px;
+    text-align: center;
+    color: white;
+    height: 15px;
+    width: 15px;
+    border-radius: 15px;
+    position: absolute;
+    right: -1px;
+    top: 10px;
+}
+
 .dropdownContent {
     position: absolute;
     max-width: 370px;
