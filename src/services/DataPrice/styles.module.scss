@@ -1,0 +1,91 @@
+@import '../../variables.scss';
+
+.menuItem{
+    width: min(370px, 100%);
+}
+.menuItem:hover{
+    cursor: pointer;
+}
+.imageContainer{
+    position: relative;
+  display: inline-block;
+}
+.hoverContent{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.imageContainer:hover .hoverContent {
+    // cursor: pointer;
+    opacity: 1;
+  }
+.description{
+    max-width: 370px;
+    display: flex;
+    justify-content: space-between;
+}
+.label{
+    text-align: start;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+}
+.name{
+   display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden; 
+}
+
+.quantityButtons{
+    display: flex;
+    align-items: center;
+span{
+    width: 48px;
+}
+}
+
+.CartIcon2{
+    padding: 0;
+}
+// .forButton{
+//     display: flex;
+//     justify-content: center;
+// }
+
+// .button{
+//     margin: 48px;
+//     width: 180px;
+//     height: 62px;
+//     background-color: #F14F4F;
+//     border-radius: 5%;
+//     color: #ffffff;
+// }
+// .button:hover{
+//     cursor: pointer;
+//     background-color: #8C2828;
+// }
+.buttonContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.buttonLeft{
+    margin-right: 20px;
+    width: 50px;
+    height: 50px;
+}
+.buttonRight{
+    margin-left: 20px;
+    width: 50px;
+    height: 50px;
+}

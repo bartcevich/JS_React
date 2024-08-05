@@ -2,11 +2,25 @@ import styles from "./styles.module.scss";
 import React, { useState, useEffect } from "react";
 import logoImage from "../../assets/Logo.png";
 import shoppingCartIcon from "../../assets/cart.png";
+import NumberUnits from "../../services/NunberUnits/NumberUnits";
+import { Link } from "react-router-dom";
+
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../redux/store";
+import { selectAllData, updateCartData } from "../../redux/cartSlice";
+type cartState = {
+  CartData: {};
+  CardID: number;
+  firstName: string;
+  lastName: string;
+  totalProducts: number;
+};
 
 const Navigation: React.FC = () => {
   const [isTop, setIsTop] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const headerDataUser = useSelector<RootState, cartState>(selectAllData);
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -47,10 +61,6 @@ const Navigation: React.FC = () => {
   const handleClick1 = () => {
     //setOpenMenu1((prevValue) => !prevValue);
   };
-  //const [openMenu2, setOpenMenu2] = useState(false);
-  const handleClick2 = () => {
-    //setOpenMenu2((prevValue) => !prevValue);
-  };
   const handleClick3 = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -63,16 +73,14 @@ const Navigation: React.FC = () => {
         }`}
       >
         <div className={styles.logoContainer}>
-          <div className={styles.logo}>
+          <Link to="/" className={styles.logo}>
             <img src={logoImage} alt="logo" />
-          </div>
+          </Link>
         </div>
         {(!isMobile || isMenuOpen) && (
           <div className={styles.mobileMenu}>
             <div className={styles.dropdown}>
-              <div className={styles.dropdownTitle} onClick={handleClick2}>
-                Catalog
-              </div>
+              <div className={styles.dropdownTitle}>Catalog</div>
             </div>
             <div className={styles.dropdown}>
               <div className={styles.dropdownTitle} onClick={handleClick1}>
@@ -80,15 +88,20 @@ const Navigation: React.FC = () => {
               </div>
             </div>
             <div className={styles.dropdown3}>
-              <div className={styles.dropdownTitle} onClick={handleClick3}>
+              <Link to="/cart" className={styles.dropdownTitle}>
                 Cart
-              </div>
+              </Link>
               <img src={shoppingCartIcon} alt="иконка корзины покупок" />
+              <div className={styles.dropdown3absolute}>
+                {headerDataUser.totalProducts}
+              </div>
             </div>
             <div className={styles.dropdown}>
-              <div className={styles.dropdownTitle} onClick={handleClick3}>
-                Johnson Smith
-              </div>
+              {headerDataUser.CardID !== -5 && (
+                <div className={styles.dropdownTitle} onClick={handleClick3}>
+                  {headerDataUser.firstName} {headerDataUser.lastName}
+                </div>
+              )}
             </div>
           </div>
         )}

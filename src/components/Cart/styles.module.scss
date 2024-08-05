@@ -1,0 +1,147 @@
+@import '../../variables.scss';
+.wrapper{
+    margin: 0 auto;
+    margin-bottom: 150px;
+    width: min(1180px, 100%);
+    // max-width: 1180px;
+    // width: 100%;
+    display: flex;
+    flex-flow: column;
+}
+.textH2{
+    margin: 130px 0 70px 0;
+    @include font(#444B58, Jost, 36px, normal, bold, 36px, 0px);
+    //font-size: clamp(15px, 2vw, 20px);
+}
+.textH3{
+    margin: 50px 0 400px 0;
+    text-align: center;
+    @include font(#B2B5BB, Jost, 23px, normal, bold, 23px, 0px);
+}
+
+.twoBlock{
+    display: flex;
+    flex-flow: row;
+    gap: 25px;
+}
+.imageContainer{
+    padding-left: 50px;
+    max-width: 730px;
+    width: 100%;
+    border: 1px solid #c4c4c4;
+}
+.imageWrapper{
+    position: relative;
+    display: flex;
+    margin: 25px 0;
+}
+.imageProduct{
+    width: 100px;
+    background-color: #B2B5BB;
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 15%;
+    height: 100%;
+    background-color: rgba(243, 236, 236, 0.5); // Цвет и прозрачность затемнения
+  }
+.textP{
+    padding-left: 10px;
+    width: 280px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+}
+.totalCount{
+    @include font(#444B58, Jost, 18px, normal, 700, 21px, 0px);
+    //font-size: clamp(15px, 2vw, 20px);
+}
+
+.without{
+    @include font(#444B58, Jost, 17px, normal, 300, 25px, 0px);
+    //font-size: clamp(15px, 2vw, 20px);
+}
+.totalCount2{
+    @include font(#B2B5BB, Jost, 18px, normal, 700, 21px, 0px);
+}
+.buttonDiv{
+    width: 288px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.buttonInLine{
+    display: flex;
+}
+.buttonOne{
+    width: 288px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.buttonLeft{
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+}
+.buttonItem{
+    display: flex;
+    align-items: center;
+}
+.buttonRight{
+    width: 50px;
+    height: 50px;
+    margin-left: 15px;
+}
+.buttonDelete{
+    margin-left: 20px;
+    @include font(#B2B5BB, Jost, 18px, normal, bold, 25px, -1px);
+    //font-size: clamp(15px, 2vw, 20px);
+}
+.info{
+    // width: 356px;
+    width: min(356px, 100%);
+}
+.textPrice{
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+.line{
+    margin-bottom: 20px;
+    border: 1px solid #c4c4c4;
+}
+.totalCount,
+.without,
+.total{
+    text-wrap: nowrap;
+    @include font(#B2B5BB, Jost, 20px, normal, 700, 30px, -1px);
+    //font-size: clamp(15px, 2vw, 20px);
+}
+.totalCount{
+    
+    @include font(#B2B5BB, Jost, 18px, normal, 800, 25px, 0px);
+    //font-size: clamp(15px, 2vw, 20px);
+}
+.without{
+    @include font(#B2B5BB, Jost, 18px, normal, 800, 25px, 0px);
+    //font-size: clamp(15px, 2vw, 20px);
+}
+.total{
+    @include font(#B2B5BB, Jost, 23px, normal, bold, 25px, 0px);
+    //font-size: clamp(15px, 2vw, 20px);
+}
+.totalCount2{
+    @include font(#444B58, Jost, 18px, normal, bold, 25px, -1px);
+    //font-size: clamp(15px, 2vw, 20px);
+}
+.without2{
+    @include font(#444B58, Jost, 21px, normal, 800, 35px, 0px);
+    //font-size: clamp(15px, 2vw, 20px);
+}
+.total2{
+    @include font(#444B58, Jost, 21px, normal, 800, 35px, 0px);
+    //font-size: clamp(15px, 2vw, 20px);
+}
