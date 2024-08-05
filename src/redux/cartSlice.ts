@@ -66,7 +66,6 @@ export const cartSlice = createSlice({
     },
   },
 });
-// export const selectCurrencyState = (state: RootState): currencyState => state.currencys;
 export const selectAllData = (state: RootState): cartState => state.carts;
 export const { updateCartData, updateShowProduct2, updateCardID, updateIDforUpdateCart, updateNumberUnits, updateTotalProducts, updateTotal, updateDiscountedTotal, updateFirstName, updateLastName } = cartSlice.actions;
 export default cartSlice.reducer;

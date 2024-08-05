@@ -33,7 +33,6 @@ export const currencySlice = createSlice({
     },
   },
 });
-// export const selectCurrencyState = (state: RootState): currencyState => state.currencys;
 export const selectAllCurrency = (state: RootState): currencyState => state.currencys;
 export const { updateShowProduct, updateCartStorage, updateQuantity, updateEur } = currencySlice.actions;
 export default currencySlice.reducer;
