@@ -16,12 +16,9 @@ import { Provider } from "react-redux";
 import { store } from "../src/redux/store";
 import "./App.css";
 
-// import AllPrice from "./services/DataPrice/allPrice";
-
 function App() {
   return (
     <Provider store={store}>
-      {/* <AllPrice /> */}
       <Router>
         <Header />
         <main className="mainContainer">
